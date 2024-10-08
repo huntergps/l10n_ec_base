@@ -1452,11 +1452,21 @@ class ImportElectronicDetails(models.Model):
     distribuir = fields.Boolean(default=False)
     distribuir_code = fields.Char('Codigo producto para Distribución')
 
-    type = fields.Selection([
-        ('consu', 'Consumible'),
-        ('service','Servicio'),
-        ('product','Almacenable')
-        ], string='Tipo', default='product', required=True)
+    # type = fields.Selection([
+    #     ('consu', 'Consumible'),
+    #     ('service','Servicio'),
+    #     ('product','Almacenable')
+    #     ], string='Tipo', default='product', required=True)
+    type = fields.Selection(
+        string="Tipo",
+        selection=[
+            ('consu', "Goods"),
+            ('service', "Service"),
+            ('combo', "Combo"),
+        ],
+        required=True,
+        default='consu',
+    )
     categ_id = fields.Many2one('product.category', 'Categoria',change_default=True, default=_get_default_category_id)
     product_id = fields.Many2one('product.product', string='Producto', domain=[('purchase_ok', '=', True)], change_default=True, ondelete='cascade')
 

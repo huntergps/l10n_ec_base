@@ -23,6 +23,8 @@
         'l10n_ec_edi',
         'l10n_ec_reports',
         'l10n_ec_reports_ats',
+        'sale',
+        'purchase'
     ],
     'data': [
         'security/security.xml',

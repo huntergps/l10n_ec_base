@@ -1,4 +1,4 @@
-<odoo>
+<!-- <odoo>
   <data>
 
     <record id="l10n_ec_base_edoc_import_form_view" model="ir.ui.view">
@@ -19,7 +19,7 @@
 
                         <button name="get_doc" string="Cargar Datos" class="oe_stat_button" icon="fa-clipboard"
                             invisible="orders_purchase_ids ==[]"
-                            type="object"/>
+                            type="object"/> -->
 
                         <!-- <button name="homologar_lineas_importadas" type="object" icon="fa-magic"
                             attrs="{'invisible': [('estatus_cola', 'in', ('creado','procesado')), ('orders_purchase_ids', '!=', [])]}"
@@ -44,7 +44,7 @@
                             class="oe_stat_button" icon="fa-magic"
                             attrs="{'invisible': [('estatus_import', '!=', 'IMPORT'), ('storables_to_map_count', '!=', 0)]}"
                             string="Crear Factura de Compra"/> -->
-                    </div>
+                    <!-- </div>
 
                     <group invisible="pagina in [2,3,4]">
                         <label for="secuencial" string="Documento a Importar"/>
@@ -82,9 +82,9 @@
                                 <field name="establecimiento" placeholder="001" style="width:30%" class="o_address_city"/>
                                 <field name="puntoemision" placeholder="001" style="width:30%" class="o_address_state"/>
                                 <field name="secuencial" placeholder="123456789" style="width:35%" class="o_address_zip"/>
-                            </div>
+                            </div> -->
                             <!-- <field name="product_id"/> -->
-                        </group>
+                        <!-- </group>
                         <group>
                             <field name="invoice_date" string="Fecha" readonly="1"/>
                             <label for="fechaautorizacion" string="Fecha Autorización"/>
@@ -106,7 +106,7 @@
                         <page string="Proceso">
                             <group>
                                 <field name="compra_detail_ids" nolabel="1">
-                                    <tree string="Detalles" create="0" delete="1" editable="1" limit="100">
+                                    <tree string="Detalles" create="0" delete="1" editable="1" limit="100"> -->
                                         <!-- <button name="button_borrar_linea" type="object" string="Borrar Línea" style="color:red;" icon="fa-times-circle"/> -->
 
                                         <!-- <field name="sequence" invisible="1" class="o_list_record_selector"/> -->
@@ -138,7 +138,7 @@
                                         <field name="crear" invisible="1"/>
                                         <field name="company_id" invisible="1"/> -->
                                         <!-- <button name="button_crear_producto_desde_linea" type="object" string="Crear Producto" icon="fa-circle"/> -->
-                                    </tree>
+                                    <!-- </tree>
                                     <form>
                                         <group>
                                             <field name="product_code" string="Código"/>
@@ -153,14 +153,14 @@
                                         </group>
                                     </form>
                                 </field>
-                            </group>
+                            </group> -->
 
                             <!-- <group class="oe_subtotal_footer oe_right">
                                 <field name="orders_purchase_ids" invisible="1"/>
                                 <field name="invoices_purchase_ids" invisible="1"/>
                                 <field name="storables_to_map_count" invisible="0"/>
                             </group> -->
-                        </page>
+                        <!-- </page>
 
                         <page string="Información">
                             <group>
@@ -171,9 +171,9 @@
                                     <field name="estatus_import" readonly="0"/>
                                     <field name="user_id"/>
                                 </group>
-                                <group>
+                                <group> -->
                                     <!-- <field name="ambiente_id"/> -->
-                                    <field name="fecha"/>
+                                    <!-- <field name="fecha"/>
                                     <field name="fecha_proceso"/>
                                     <field name="mensajes" readonly="1"/>
                                 </group>
@@ -191,7 +191,7 @@
       <field name="model">l10n_ec_base.edoc.import</field>
       <field name="arch" type="xml">
         <tree  string="Documento electronico RIDE">
-          <field name="id"/>
+          <field name="id"/> -->
           <!-- <field name="invoice_date"/>
           <field name="partner_id"/>
           <field name="name"/>
@@ -202,7 +202,7 @@
           <field name="tipo_importacion" optional="hide"/>
           <field name="total" readonly="1"/>
           <field name="total_descuento" readonly="1"/> -->
-        </tree>
+        <!-- </tree>
       </field>
     </record>
 
@@ -223,11 +223,11 @@
                 <filter string="Entidad" name="partner_id" domain="[]" context="{'group_by': 'partner_id'}"/>
             </search>
         </field>
-    </record>
+    </record> -->
 
 
     <!-- actions opening views on models -->
-    <record id="action_sri_import_orders_list" model="ir.actions.act_window">
+    <!-- <record id="action_sri_import_orders_list" model="ir.actions.act_window">
         <field name="name">Cola de documentos electronicos</field>
         <field name="res_model">l10n_ec_base.edoc.import</field>
         <field name="view_mode">tree,form</field>
@@ -248,4 +248,4 @@
 
 
   </data>
-</odoo>
+</odoo> -->
