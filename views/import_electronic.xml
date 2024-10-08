@@ -1,0 +1,251 @@
+<odoo>
+  <data>
+
+    <record id="l10n_ec_base_edoc_import_form_view" model="ir.ui.view">
+        <field name="name">l10n_ec_base.edoc.import.form_view</field>
+        <field name="model">l10n_ec_base.edoc.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="estatus_cola" widget="statusbar"/>
+                    <field name="pagina_desc" widget="statusbar"/>
+                </header>
+                <field name="orders_to_map_count" invisible="1"/>
+                <field name="orders_purchase_ids" invisible="1"/>
+                <field name="pagina" invisible="1"/>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+
+                        <button name="get_doc" string="Cargar Datos" class="oe_stat_button" icon="fa-clipboard"
+                            invisible="orders_purchase_ids ==[]"
+                            type="object"/>
+
+                        <!-- <button name="homologar_lineas_importadas" type="object" icon="fa-magic"
+                            attrs="{'invisible': [('estatus_cola', 'in', ('creado','procesado')), ('orders_purchase_ids', '!=', [])]}"
+                            string="Homologar Productos" class="oe_stat_button"/>
+
+                        <button type="object" name="action_view_purchase_order"
+                            class="oe_stat_button" string="Ver Orden de Compra"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('estatus_cola', 'in', ('creado','procesando')), ('orders_purchase_ids', '=', [])]}"/>
+
+                        <button type="object" name="action_view_invoice"
+                            class="oe_stat_button" string="Ver Factura de Compra"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('estatus_cola', 'in', ('creado','procesando')), ('invoices_purchase_ids', '=', [])]}"/>
+
+                        <button name="action_order_create" type="object"
+                            class="oe_stat_button" icon="fa-magic"
+                            attrs="{'invisible': [('estatus_import', '!=', 'IMPORT'), ('storables_to_map_count', '=', 0)]}"
+                            string="Crear Orden de Compra"/>
+
+                        <button name="action_invoice_create" type="object"
+                            class="oe_stat_button" icon="fa-magic"
+                            attrs="{'invisible': [('estatus_import', '!=', 'IMPORT'), ('storables_to_map_count', '!=', 0)]}"
+                            string="Crear Factura de Compra"/> -->
+                    </div>
+
+                    <group invisible="pagina in [2,3,4]">
+                        <label for="secuencial" string="Documento a Importar"/>
+                        <div class="o_address_format">
+                            <field name="tipo_importacion" style="width:10%" class="o_address_state"
+                              readonly="pagina in [2,3,4]"/>
+                            <field name="name" style="width:70%" class="o_address_city"
+                              readonly="pagina in [2,3,4]"
+                              invisible="tipo_importacion =='file'"
+
+                                />
+                            <field name="data_file" style="width:70%" class="o_address_city" filename="data_filename" placeholder="Seleccione el XML a leer..."
+                              readonly="pagina in [2,3,4]"
+                              invisible="tipo_importacion =='sri'"
+
+                              />
+                        </div>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="partner_id"
+                                context="{'default_company_type': 'company'}"
+                                domain="[('supplier_rank', '!=', 0)]"
+                                readonly="pagina in [2,3,4]"
+                                />
+                            <field name="email"
+                              readonly="pagina in [11,12,13]"
+                              />
+                            <field name="reference" string="Nro de Documento" readonly="1"/>
+                            <field name="autorizacion" readonly="1"/>
+
+                            <label for="secuencial" string="Nro. de Documento" readonly="1"/>
+                            <div class="o_address_format">
+                                <field name="establecimiento" placeholder="001" style="width:30%" class="o_address_city"/>
+                                <field name="puntoemision" placeholder="001" style="width:30%" class="o_address_state"/>
+                                <field name="secuencial" placeholder="123456789" style="width:35%" class="o_address_zip"/>
+                            </div>
+                            <!-- <field name="product_id"/> -->
+                        </group>
+                        <group>
+                            <field name="invoice_date" string="Fecha" readonly="1"/>
+                            <label for="fechaautorizacion" string="Fecha Autorización"/>
+                            <div class="o_address_format">
+                                <field name="fechaautorizacion" readonly="1"
+                                  invisible="pagina in [0]"
+                                   />
+                            </div>
+                            <field name="estado_sri" readonly="1"/>
+                            <field name="subtotal" invisible="1" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                            <field name="total_descuento" readonly="1"/>
+                            <field name="total_descuento_lineas" string="Descuento Lineas" readonly="1"/>
+                            <field name="porcentaje_descuento" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Proceso">
+                            <group>
+                                <field name="compra_detail_ids" nolabel="1">
+                                    <tree string="Detalles" create="0" delete="1" editable="1" limit="100">
+                                        <!-- <button name="button_borrar_linea" type="object" string="Borrar Línea" style="color:red;" icon="fa-times-circle"/> -->
+
+                                        <!-- <field name="sequence" invisible="1" class="o_list_record_selector"/> -->
+                                        <!-- <field name="dummie" string=" " invisible="1"/> -->
+                                        <!-- <button name="button_asignar_producto_linea" type="object" string="Asignar Producto" icon="fa-forward"/> -->
+                                        <!-- <button name="button_asignar_segimiento_linea" type="object" string="Tipo Seguimiento" icon="fa-location-arrow" optional="show"/> -->
+
+                                        <!-- <field name="dummie" string=" " invisible="1"/>
+                                        <field name="tracking" string="Seguir" optional="show" width="1%"/>
+                                        <field name="tipo_homologacion" invisible="1"/>
+                                        <field name="product_code" width="2%" string="Código"/>
+                                        <field name="unificar" optional="show" width="2%" string="Unif."/>
+                                        <field name="distribuir" optional="show" width="2%" string="Dist." invisible="1"/>
+                                        <field name="distribuir_code" optional="show" width="2%" string="COD. Dist."/>
+                                        <field name="product_name" string="Nombre" width="10%"/>
+                                        <field name="product_tmpl_id" string="Producto Template" invisible="1"/>
+                                        <field name="product_qty" width="2%" string="Cant." sum="Total" optional="hide" readonly="1"/>
+                                        <field name="price_unit" string="Costo" width="2%" optional="hide"/>
+                                        <field name="discount" string="% Desc" width="2%" avg="Promedio" optional="hide"/>
+                                        <field name="monto_discount" string="Desc" width="2%" optional="hide" sum="Total"/>
+                                        <field name="total_sin_impuesto" sum="Total" width="2%" optional="hide" string="Total Neto"/>
+                                        <field name="unitario_sin_impuesto" sum="Total" width="2%" optional="hide" string="Unitario Neto"/>
+                                        <field name="product_id" string="Producto Theos" width="10%" invisible="0"/>
+                                        <field name="supplier_taxes_id" widget="many2many_tags" width="3%" optional="show"/>
+                                        <field name="customer_taxes_id" widget="many2many_tags" width="3%" optional="show"/>
+                                        <field name="product_uom" width="2%" required="1" optional="show"/>
+                                        <field name="type" required="1" optional="show"/>
+                                        <field name="categ_id" required="1" optional="show"/>
+                                        <field name="crear" invisible="1"/>
+                                        <field name="company_id" invisible="1"/> -->
+                                        <!-- <button name="button_crear_producto_desde_linea" type="object" string="Crear Producto" icon="fa-circle"/> -->
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="product_code" string="Código"/>
+                                            <field name="product_name" string="Nombre"/>
+                                            <field name="product_id" string="Producto Theos" invisible="0"/>
+                                            <field name="product_tmpl_id" string="Producto Template" invisible="1"/>
+                                            <field name="tracking"/>
+                                            <field name="tipo_homologacion" invisible="1"/>
+                                            <field name="type" optional="show" required="1"/>
+                                            <field name="categ_id" required="1"/>
+                                            <field name="supplier_taxes_id" widget="many2many_tags"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+
+                            <!-- <group class="oe_subtotal_footer oe_right">
+                                <field name="orders_purchase_ids" invisible="1"/>
+                                <field name="invoices_purchase_ids" invisible="1"/>
+                                <field name="storables_to_map_count" invisible="0"/>
+                            </group> -->
+                        </page>
+
+                        <page string="Información">
+                            <group>
+                                <group>
+                                    <field name="tipo_homologacion" readonly="1" required="1"/>
+                                    <field name="state_purchase_orders"/>
+                                    <field name="estatus_cola"/>
+                                    <field name="estatus_import" readonly="0"/>
+                                    <field name="user_id"/>
+                                </group>
+                                <group>
+                                    <!-- <field name="ambiente_id"/> -->
+                                    <field name="fecha"/>
+                                    <field name="fecha_proceso"/>
+                                    <field name="mensajes" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="l10n_ec_base_edoc_import_tree_view">
+      <field name="name">l10n_ec_base.edoc.import.tree_view</field>
+      <field name="model">l10n_ec_base.edoc.import</field>
+      <field name="arch" type="xml">
+        <tree  string="Documento electronico RIDE">
+          <field name="id"/>
+          <!-- <field name="invoice_date"/>
+          <field name="partner_id"/>
+          <field name="name"/>
+          <field name="estatus_import"/>
+          <field name="fecha_proceso"/>
+          <field name="estatus_cola"/>
+          <field name="mensajes"/>
+          <field name="tipo_importacion" optional="hide"/>
+          <field name="total" readonly="1"/>
+          <field name="total_descuento" readonly="1"/> -->
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_sri_import_orders_list_search" model="ir.ui.view">
+        <field name="name">l10n_ec_base.edoc.import.search</field>
+        <field name="model">l10n_ec_base.edoc.import</field>
+        <field name="arch" type="xml">
+            <search string="Documentos">
+                <field name="name" string="Autorizacion"
+                    filter_domain="['|', ('name', 'ilike', self), ('partner_id', 'ilike', self)]"/>
+                <field name="partner_id" string="Entidad"/>
+                <separator/>
+                <filter string="Por procesar" name="state_new" domain="[('estatus_import', 'not in', ('ORDER','INVOICE'))]"/>
+                <filter string="Procesado" name="state_done" domain="[('estatus_import', 'in', ('ORDER','INVOICE'))]"/>
+                <separator/>
+                <filter string="Estado" name="estatus_import" domain="[]" context="{'group_by': 'estatus_import'}"/>
+                <filter string="Fecha" name="groupby_date" domain="[]" context="{'group_by': 'fechaautorizacion'}"/>
+                <filter string="Entidad" name="partner_id" domain="[]" context="{'group_by': 'partner_id'}"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record id="action_sri_import_orders_list" model="ir.actions.act_window">
+        <field name="name">Cola de documentos electronicos</field>
+        <field name="res_model">l10n_ec_base.edoc.import</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="l10n_ec_base_edoc_import_tree_view"/>
+        <field name="search_view_id" ref="view_sri_import_orders_list_search"/>
+        <field name="context">{
+                'search_default_state_new':1,
+                }</field>
+    </record>
+
+
+    <menuitem id="l10n_ec_base.menu_purchase_sri" name="SRI"
+            parent="purchase.menu_purchase_root" sequence="30" />
+
+
+    <menuitem name="Importacion de Documentos Electronicos" id="l10n_ec_base.menu_sri_import_orders_list" parent="l10n_ec_base.menu_purchase_sri"
+              action="l10n_ec_base.action_sri_import_orders_list"/>
+
+
+  </data>
+</odoo>

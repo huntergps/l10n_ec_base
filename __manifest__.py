@@ -26,7 +26,9 @@
     ],
     'data': [
         'security/security.xml',
-        'views/partner_view.xml'
+        'views/partner_view.xml',
+        # 'views/import_electronic.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [],
     'installable': True,
