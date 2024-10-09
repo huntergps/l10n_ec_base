@@ -1,6 +1,6 @@
 {
     'name': 'Ecuadorian Localization Base Customization',
-    'version': '3.9',
+    'version': '18.01',
     'summary': 'Base customization module for Ecuadorian localization',
     'description': """
     Este módulo es la personalización base para la localización ecuatoriana.
@@ -29,12 +29,11 @@
     'data': [
         'security/security.xml',
         'views/partner_view.xml',
-        # 'views/import_electronic.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [],
     'installable': True,
-    'application': False,
+    'application': True,
     'auto_install': False,
     'maintainer': 'Elmer Salazar Arias',
     'email': 'esalazargps@gmail.com',
