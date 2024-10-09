@@ -39,7 +39,9 @@ class PurchaseOrder(models.Model):
 
     def _prepare_invoice(self):
         res= super(PurchaseOrder, self)._prepare_invoice()
-        res['type']=self.type_invoice_compra or 'in_invoice'
+        # res['type']=self.type_invoice_compra or 'in_invoice'
+        # move_type = self._context.get('default_move_type', 'in_invoice')
+        
         return res
 
 

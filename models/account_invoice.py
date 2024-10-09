@@ -23,9 +23,7 @@ class AccountMove(models.Model):
     diferencia_xml = fields.Monetary(string='Diferencia XML',
         store=True, readonly=True, compute='_compute_diff_import')
 
-    @api.depends('line_ids.debit',
-                'line_ids.credit',
-                'total_xml','amount_total')
+    @api.depends('line_ids.debit', 'line_ids.credit','total_xml','amount_total')
     def _compute_diff_import(self):
         for order in self:
             total_xml = order.total_xml or 0.0
