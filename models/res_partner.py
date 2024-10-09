@@ -53,7 +53,7 @@ class ResPartner(models.Model):
             partner.can_edit_credit_payment_terms = self.env.user.has_group('l10n_ec_base.group_allow_change_credit_payment_terms')
 
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         if 'vat' in vals and vals['vat']:
             self._check_vat_uniqueness(vals['vat'])
