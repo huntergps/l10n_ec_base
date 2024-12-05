@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="stock_package_type_form_l10n_ec_base">
+        <field name="name">stock.package.type.form.delivery</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='name']" position="after">
+                <group>
+                    <field name="code" required="1"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='barcode']" position="after">
+                  <group>
+                      <field name="is_default"  />
+                  </group>
+              </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_package_type_tree_l10n_ec_base">
+        <field name="name">stock.package.type.list.delivery</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="code"/>
+            </xpath>
+            <xpath expr="//field[@name='barcode']" position="after">
+                <field name="is_default"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

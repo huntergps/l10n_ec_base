@@ -21,6 +21,26 @@ class ProductTemplate(models.Model):
     external_id = fields.Char('Id DB Externa',index=True)
 
 
+    sale_uom_ids = fields.Many2many(
+        'uom.uom',
+        'product_template_uom_sale_rel',
+        'template_id',
+        'uom_id',
+        string='Unidades de Medida permitidas en Ventas',
+        tracking=True,
+        help="Seleccione las Unidades de Medida permitidas en Ventas"
+    )
+
+    purchase_uom_ids = fields.Many2many(
+        'uom.uom',
+        'product_template_uom_purchase_rel',
+        'template_id',
+        'uom_id',
+        string='Unidades de Medida permitidas en Compras',
+        tracking=True,
+        help="Seleccione las Unidades de Medida permitidas en Compras"
+    )
+
 
 class ProductProduct(models.Model):
     _inherit = "product.product"

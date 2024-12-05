@@ -11,6 +11,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'maintainer': 'Elmer Salazar Arias',
     'website': 'http://www.galapagos.tech',
+    'email': 'esalazargps@gmail.com',
     'license': 'LGPL-3',
     'depends': [
         'base',
@@ -28,13 +29,43 @@
     ],
     'data': [
         'security/security.xml',
-        'views/partner_view.xml',
         'security/ir.model.access.csv',
+        'views/partner_view.xml',
+        # 'views/stock_package_type_views.xml',
+        # 'views/product_packaging_views.xml',
+        'views/product_product_views.xml',
+        'views/product_template_views.xml',
+        'views/purchase_order_views.xml',
+        'views/sale_order_views.xml',
+        'views/res_users.xml',
     ],
+    'assets': {
+        'web._assets_primary_variables': [
+            (
+                'after',
+                'web/static/src/scss/primary_variables.scss',
+                'l10n_ec_base/static/src/scss/variables.scss'
+            ),
+        ],
+        'web.assets_backend': [
+            'l10n_ec_base/static/src/core/**/*.*',
+            'l10n_ec_base/static/src/chatter/*.scss',
+            'l10n_ec_base/static/src/chatter/*.xml',
+            (
+                'after',
+                'mail/static/src/chatter/web_portal/chatter.js',
+                'l10n_ec_base/static/src/chatter/chatter.js'
+            ),
+            (
+                'after',
+                'mail/static/src/chatter/web/form_compiler.js',
+                'l10n_ec_base/static/src/views/form/form_compiler.js'
+            ),
+            'l10n_ec_base/static/src/views/form/form_renderer.js',
+        ],
+    },
     'demo': [],
     'installable': True,
     'application': True,
     'auto_install': False,
-    'maintainer': 'Elmer Salazar Arias',
-    'email': 'esalazargps@gmail.com',
 }
